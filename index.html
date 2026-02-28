@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rede Recuperar Brasil</title>
+
 <style>
 body {
     margin: 0;
@@ -14,8 +15,12 @@ body {
 header {
     background: #0d6efd;
     color: white;
-    padding: 20px;
+    padding: 25px;
     text-align: center;
+}
+
+header h1 {
+    margin: 0;
 }
 
 .container {
@@ -23,36 +28,51 @@ header {
 }
 
 select {
-    padding: 10px;
+    padding: 12px;
     width: 100%;
     margin-bottom: 20px;
     border-radius: 8px;
     border: 1px solid #ccc;
+    font-size: 16px;
 }
 
 .card {
     background: white;
-    padding: 15px;
+    padding: 20px;
     margin-bottom: 15px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.02);
 }
 
 .card h3 {
-    margin: 0 0 10px 0;
+    margin-top: 0;
 }
 
 .btn {
     display: inline-block;
-    padding: 8px 12px;
+    padding: 10px 15px;
     background: #25d366;
     color: white;
     text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #0d6efd;
+    color: white;
+    margin-top: 30px;
 }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -63,7 +83,7 @@ select {
 <div class="container">
 
 <select id="estado" onchange="filtrar()">
-<option value="todos">Selecione o Estado</option>
+<option value="todos" selected>Todos os Estados</option>
 <option value="sp">São Paulo</option>
 <option value="rj">Rio de Janeiro</option>
 <option value="mg">Minas Gerais</option>
@@ -92,13 +112,19 @@ select {
 </div>
 </div>
 
+<footer>
+© 2026 Rede Recuperar Brasil - Todos os direitos reservados
+</footer>
+
 <script>
 function filtrar() {
     let estado = document.getElementById("estado").value;
     let cards = document.querySelectorAll(".card");
 
-    cards.forEach(card => {
-        if (estado === "todos" || card.dataset.estado === estado) {
+    cards.forEach(function(card) {
+        if (estado === "todos") {
+            card.style.display = "block";
+        } else if (card.getAttribute("data-estado") === estado) {
             card.style.display = "block";
         } else {
             card.style.display = "none";
