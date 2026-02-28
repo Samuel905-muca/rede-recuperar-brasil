@@ -1,131 +1,111 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Encontre Casas de Recuperação no Brasil</title>
-
+<title>Rede Recuperar Brasil</title>
 <style>
-body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f4f6f9;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
 }
 
-header{
-    background:#0a3d62;
-    color:white;
-    padding:25px;
-    text-align:center;
+header {
+    background: #0d6efd;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
-header h1{
-    margin:0;
+.container {
+    padding: 20px;
 }
 
-.search-box{
-    margin-top:15px;
+select {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
 }
 
-.search-box input{
-    padding:10px;
-    width:80%;
-    max-width:400px;
-    border-radius:5px;
-    border:none;
+.card {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.container{
-    padding:30px 20px;
-    max-width:1200px;
-    margin:auto;
+.card h3 {
+    margin: 0 0 10px 0;
 }
 
-.estados{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.1);
-    text-align:center;
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:scale(1.05);
-}
-
-.card a{
-    text-decoration:none;
-    color:#0a3d62;
-    font-weight:bold;
-}
-
-footer{
-    background:#0a3d62;
-    color:white;
-    text-align:center;
-    padding:20px;
-    margin-top:40px;
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #25d366;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 14px;
 }
 </style>
-
 </head>
 <body>
 
 <header>
-<h1>Casas de Recuperação no Brasil</h1>
-<p>Encontre clínicas e comunidades terapêuticas em todos os Estados</p>
-
-<div class="search-box">
-<input type="text" placeholder="Buscar por Estado ou Cidade...">
-</div>
+<h1>Rede Recuperar Brasil</h1>
+<p>Encontre casas de recuperação em todo o Brasil</p>
 </header>
 
 <div class="container">
-<h2>Estados do Brasil</h2>
 
-<div class="estados">
+<select id="estado" onchange="filtrar()">
+<option value="todos">Selecione o Estado</option>
+<option value="sp">São Paulo</option>
+<option value="rj">Rio de Janeiro</option>
+<option value="mg">Minas Gerais</option>
+</select>
 
-<div class="card"><a href="#">São Paulo</a></div>
-<div class="card"><a href="#">Rio de Janeiro</a></div>
-<div class="card"><a href="#">Minas Gerais</a></div>
-<div class="card"><a href="#">Bahia</a></div>
-<div class="card"><a href="#">Paraná</a></div>
-<div class="card"><a href="#">Rio Grande do Sul</a></div>
-<div class="card"><a href="#">Santa Catarina</a></div>
-<div class="card"><a href="#">Goiás</a></div>
-<div class="card"><a href="#">Pernambuco</a></div>
-<div class="card"><a href="#">Ceará</a></div>
-<div class="card"><a href="#">Espírito Santo</a></div>
-<div class="card"><a href="#">Mato Grosso</a></div>
-<div class="card"><a href="#">Mato Grosso do Sul</a></div>
-<div class="card"><a href="#">Distrito Federal</a></div>
-<div class="card"><a href="#">Amazonas</a></div>
-<div class="card"><a href="#">Pará</a></div>
-<div class="card"><a href="#">Alagoas</a></div>
-<div class="card"><a href="#">Sergipe</a></div>
-<div class="card"><a href="#">Rondônia</a></div>
-<div class="card"><a href="#">Tocantins</a></div>
-<div class="card"><a href="#">Acre</a></div>
-<div class="card"><a href="#">Amapá</a></div>
-<div class="card"><a href="#">Roraima</a></div>
-<div class="card"><a href="#">Maranhão</a></div>
-<div class="card"><a href="#">Paraíba</a></div>
-<div class="card"><a href="#">Rio Grande do Norte</a></div>
-<div class="card"><a href="#">Piauí</a></div>
+<div id="lista">
+
+<div class="card" data-estado="sp">
+<h3>Casa Nova Vida</h3>
+<p>São Paulo - SP</p>
+<a class="btn" href="https://wa.me/5511999999999" target="_blank">Falar no WhatsApp</a>
+</div>
+
+<div class="card" data-estado="rj">
+<h3>Centro Esperança</h3>
+<p>Rio de Janeiro - RJ</p>
+<a class="btn" href="https://wa.me/5521999999999" target="_blank">Falar no WhatsApp</a>
+</div>
+
+<div class="card" data-estado="mg">
+<h3>Instituto Vida Nova</h3>
+<p>Belo Horizonte - MG</p>
+<a class="btn" href="https://wa.me/5531999999999" target="_blank">Falar no WhatsApp</a>
+</div>
 
 </div>
 </div>
 
-<footer>
-<p>© 2026 - Plataforma Nacional de Casas de Recuperação</p>
-</footer>
+<script>
+function filtrar() {
+    let estado = document.getElementById("estado").value;
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        if (estado === "todos" || card.dataset.estado === estado) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+</script>
 
 </body>
-  </html>
+</html>
